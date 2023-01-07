@@ -7,3 +7,5 @@
 - make sure you know what threading is or else i don't know xd
 - then execute it on your terminal 
 - python app.py
+
+#### could also delete some files if variable "folder" is change :)
