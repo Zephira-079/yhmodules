@@ -1,0 +1,6 @@
+globalPath = "."
+fileName = "untitled"
+fileExtension = "log"
+bin = "bin"
+ignorePath = ["bin",".git"]
+appendMode = false
