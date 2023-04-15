@@ -8,7 +8,7 @@ print(len(os.listdir(folder)))
 print("create thread every : <number of files> e.g. 10000 (default: 10000)")
 
 recent = 0
-thread_interval = str(input())
+thread_interval = int(input())
 if not thread_interval:
     thread_interval = 10000
 
