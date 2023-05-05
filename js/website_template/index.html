@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./ScrollResponse.js" async defer></script>
+    <script src="./ModifyElement.js" async defer></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: lavender;
+        }
+
+        .dummy {
+            position: relative;
+            left: 0;
+            top: 0;
+
+            background-color: aliceblue;
+            font-size: 1.2em;
+            padding: 20px;
+            margin: 20px;
+            transition: all .2s ease;
+            border: solid 10px black;
+        }
+        .hide {
+            left: 100%;
+        }
+        .show {
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        window.addEventListener("load", () => {
+            const dummy = document.createElement("div")
+            dummy.setAttribute("class", "dummy")
+            dummy.textContent = "Hello Morning"
+
+            let clones = ModifyElement.replicateElement(dummy, 100)
+
+            window.addEventListener("scroll", () => {
+                ScrollResponse.absoluteRectAll(".dummy").forEach((item, index) => {
+                    item.element.classList.toggle("hide", item.top < 20 || item.bottom - innerHeight > 20)
+                    if(index == 10) {
+                        console.log(item)
+                        item.element.style.backgroundColor = "red"
+                    }
+                })
+            })
+
+            document.addEventListener('mousemove', function (event) {
+                const x = event.clientX
+                const y = event.clientY
+                console.log(`Cursor coordinates: x=${x}, y=${y}`)
+            })
+
+        })
+    </script>
+</body>
+</html>
