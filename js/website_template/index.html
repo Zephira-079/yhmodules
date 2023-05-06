@@ -16,6 +16,8 @@
 
         body {
             background-color: lavender;
+            /* reminder overflow: hidden; */
+            overflow-x: hidden;
         }
 
         .dummy {
@@ -30,40 +32,53 @@
             transition: all .2s ease;
             border: solid 10px black;
         }
+
+        .background {
+            position: static;
+
+            height: 100vh;
+            width: 100vw;
+
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            background-image: url("https://bocchi-api.vercel.app/");
+
+        }
+
         .hide {
             left: 100%;
         }
-        .show {
-            left: 0;
-        }
     </style>
 </head>
+
 <body>
     <script>
-        window.addEventListener("load", () => {
-            const dummy = document.createElement("div")
-            dummy.setAttribute("class", "dummy")
-            dummy.textContent = "Hello Morning"
 
-            let clones = ModifyElement.replicateElement(dummy, 100)
+        window.addEventListener("load", () => {
+            // const dummy = document.createElement("div")
+            // dummy.setAttribute("class", "dummy")
+            // dummy.textContent = "Hello Morning"
+
+            const dummy = document.createElement("div")
+            dummy.setAttribute("class", "background")
+
+            let clones = ModifyElement.replicateElement(dummy, 10)
 
             window.addEventListener("scroll", () => {
-                ScrollResponse.absoluteRectAll(".dummy").forEach((item, index) => {
-                    item.element.classList.toggle("hide", item.top < 20 || item.bottom - innerHeight > 20)
-                    if(index == 10) {
-                        console.log(item)
-                        item.element.style.backgroundColor = "red"
-                    }
+                ScrollResponse.absoluteRectAll(".background").forEach((item, index) => {
+                    item.element.style.backgroundPosition = `center ${item.top * .1}`
                 })
             })
-
-            document.addEventListener('mousemove', function (event) {
-                const x = event.clientX
-                const y = event.clientY
-                console.log(`Cursor coordinates: x=${x}, y=${y}`)
-            })
-
+            // const n  = document.querySelectorAll(".dummy")[0]
+            // document.addEventListener('mousemove', function (event) {
+            //     const x = event.clientX
+            //     const y = event.clientY
+            //     n.textContent = `${x}, ${y}`
+            // })
         })
     </script>
 </body>
+
 </html>
